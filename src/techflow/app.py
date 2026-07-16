@@ -9,7 +9,7 @@ from pathlib import Path
 from urllib.parse import parse_qs
 
 from .database import TaskRepository
-from .validation import STATUSES, validate_task
+from .validation import PRIORITIES, STATUSES, validate_task
 from .views import dashboard, not_found, task_form
 
 StartResponse = Callable[[str, list[tuple[str, str]]], None]
@@ -34,17 +34,20 @@ class TaskManagerApp:
         if method == "GET" and path == "/":
             query = parse_qs(str(environ.get("QUERY_STRING", "")))
             status = query.get("status", [""])[0]
+            priority = query.get("priority", [""])[0]
             overdue = query.get("overdue", [""])[0]
             status = status if status in STATUSES else ""
+            priority = priority if priority in PRIORITIES else ""
             overdue = "1" if overdue == "1" else ""
             return self._html(
                 start_response,
                 dashboard(
                     self.repository.list_tasks(
-                        status or None, overdue_only=overdue == "1"
+                        status or None, priority or None, overdue_only=overdue == "1"
                     ),
                     self.repository.metrics(),
                     status,
+                    priority,
                     overdue,
                 ),
             )

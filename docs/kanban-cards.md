@@ -15,7 +15,7 @@ o estado final demonstrativo após a entrega da versão 1.1.
 | 8 | Automatizar testes unitários | Done | Suite cobre validação, persistência e HTTP |
 | 9 | Configurar GitHub Actions | Done | Workflow executa lint e testes em dois Pythons |
 | 10 | Documentar execução e arquitetura | Done | README e diagramas disponíveis |
-| 11 | Mudança de escopo: níveis de prioridade | To Do | Tarefas classificadas e filtradas por prioridade |
+| 11 | Mudança de escopo: níveis de prioridade | Done | Tarefas classificadas, ordenadas e filtradas por prioridade |
 | 12 | Preparar demonstração em vídeo | In Progress | Roteiro pronto; gravação depende do estudante |
 | 13 | Avaliar autenticação de usuários | To Do | História registrada para versão futura |
 
@@ -24,3 +24,4 @@ o estado final demonstrativo após a entrega da versão 1.1.
 - **To Do:** item aprovado, ainda não iniciado.
 - **In Progress:** item em execução; recomenda-se limitar o trabalho em progresso.
 - **Done:** critérios de aceite verificados e código integrado à branch principal.
+

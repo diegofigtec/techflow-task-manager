@@ -13,6 +13,8 @@ CREATE TABLE IF NOT EXISTS tasks (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT NOT NULL CHECK(length(title) BETWEEN 1 AND 120),
     description TEXT NOT NULL DEFAULT '',
+    priority TEXT NOT NULL DEFAULT 'medium'
+        CHECK(priority IN ('low', 'medium', 'high', 'critical')),
     status TEXT NOT NULL DEFAULT 'todo'
         CHECK(status IN ('todo', 'in_progress', 'done')),
     due_date TEXT,
@@ -43,6 +45,7 @@ class TaskRepository:
     def list_tasks(
         self,
         status: str | None = None,
+        priority: str | None = None,
         overdue_only: bool = False,
     ) -> list[dict[str, Any]]:
         clauses: list[str] = []
@@ -50,6 +53,9 @@ class TaskRepository:
         if status:
             clauses.append("status = ?")
             parameters.append(status)
+        if priority:
+            clauses.append("priority = ?")
+            parameters.append(priority)
         if overdue_only:
             clauses.append(
                 "due_date IS NOT NULL AND due_date < date('now') AND status != 'done'"
@@ -66,6 +72,12 @@ class TaskRepository:
             FROM tasks
             {where}
             ORDER BY
+                CASE priority
+                    WHEN 'critical' THEN 1
+                    WHEN 'high' THEN 2
+                    WHEN 'medium' THEN 3
+                    ELSE 4
+                END,
                 due_date IS NULL,
                 due_date,
                 id DESC
@@ -84,12 +96,13 @@ class TaskRepository:
         with closing(self._connect()) as connection:
             cursor = connection.execute(
                 """
-                INSERT INTO tasks (title, description, status, due_date)
-                VALUES (?, ?, ?, ?)
+                INSERT INTO tasks (title, description, priority, status, due_date)
+                VALUES (?, ?, ?, ?, ?)
                 """,
                 (
                     data["title"],
                     data["description"],
+                    data["priority"],
                     data["status"],
                     data["due_date"],
                 ),
@@ -101,13 +114,14 @@ class TaskRepository:
             cursor = connection.execute(
                 """
                 UPDATE tasks
-                   SET title = ?, description = ?, status = ?,
+                   SET title = ?, description = ?, priority = ?, status = ?,
                        due_date = ?, updated_at = CURRENT_TIMESTAMP
                  WHERE id = ?
                 """,
                 (
                     data["title"],
                     data["description"],
+                    data["priority"],
                     data["status"],
                     data["due_date"],
                     task_id,

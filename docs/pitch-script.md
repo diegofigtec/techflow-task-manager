@@ -3,7 +3,7 @@
 ## 0:00-0:30 — Abertura
 
 “Olá, eu sou [SEU NOME]. Este é o TechFlow Task Manager, desenvolvido para uma startup de
-logística acompanhar tarefas, andamento e prazos em tempo real. O projeto aplica conceitos de
+logística acompanhar tarefas, prioridades e prazos em tempo real. O projeto aplica conceitos de
 Engenharia de Software desde a modelagem até a integração contínua.”
 
 **Mostrar:** página inicial do repositório e README.
@@ -19,10 +19,10 @@ de trabalho em progresso reduz tarefas iniciadas e não concluídas.”
 ## 1:05-2:05 — Sistema funcionando
 
 “No painel é possível criar, consultar, editar, concluir e excluir tarefas. Cada tarefa possui
-status, descrição e prazo. Os indicadores resumem o trabalho da equipe e os filtros ajudam o
-gestor a acompanhar o fluxo e os atrasos.”
+prioridade, status, descrição e prazo. Os indicadores resumem o trabalho da equipe e os filtros
+ajudam o gestor a focar itens críticos.”
 
-**Demonstrar:** criar uma tarefa, editá-la, filtrá-la e marcá-la como concluída.
+**Demonstrar:** criar uma tarefa crítica, editá-la, filtrá-la e marcá-la como concluída.
 
 ## 2:05-2:40 — Testes e qualidade
 
@@ -35,10 +35,11 @@ Python. Assim, regressões são detectadas antes de uma entrega.”
 ## 2:40-3:20 — Mudança de escopo
 
 “Durante o desenvolvimento, o cliente solicitou níveis de prioridade para diferenciar demandas
-baixas, médias, altas e críticas. A mudança foi registrada no Kanban e será implementada como um
-novo incremento, com atualização do banco, formulários, filtros e testes.”
+baixas, médias, altas e críticas. A mudança foi analisada, adicionada ao Kanban e implementada na
+versão 1.1. O banco recebeu o campo de prioridade, e os formulários, cards, filtros, ordenação e
+testes foram atualizados.”
 
-**Mostrar:** card da mudança de prioridade, comparação entre as versões e README.
+**Mostrar:** card da mudança, versão-base sem prioridade, versão final e README.
 
 ## 3:20-3:50 — Reflexão final
 
@@ -50,3 +51,4 @@ adaptação e os testes automatizados aumentam a confiança para evoluir o siste
 
 “Obrigado. O código, a documentação, o histórico e as evidências estão disponíveis neste
 repositório público.”
+

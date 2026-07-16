@@ -9,6 +9,7 @@ class TaskValidationTests(unittest.TestCase):
             {
                 "title": "  Conferir expedição  ",
                 "description": "Validar o lote",
+                "priority": "critical",
                 "status": "in_progress",
                 "due_date": "2030-05-20",
             }
@@ -21,16 +22,18 @@ class TaskValidationTests(unittest.TestCase):
         _, errors = validate_task({"title": ""})
         self.assertIn("Informe um título para a tarefa.", errors)
 
-    def test_rejects_invalid_status_and_date(self) -> None:
+    def test_rejects_invalid_enumerations_and_date(self) -> None:
         _, errors = validate_task(
             {
                 "title": "Tarefa",
+                "priority": "urgent",
                 "status": "blocked",
                 "due_date": "31/12/2030",
             }
         )
-        self.assertEqual(2, len(errors))
+        self.assertEqual(3, len(errors))
 
 
 if __name__ == "__main__":
     unittest.main()
+
