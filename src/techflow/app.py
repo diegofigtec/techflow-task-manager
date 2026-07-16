@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import mimetypes
 import os
+from collections.abc import Callable, Iterable
 from pathlib import Path
-from typing import Callable, Iterable
 from urllib.parse import parse_qs
 
 from .database import TaskRepository
