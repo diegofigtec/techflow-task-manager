@@ -53,13 +53,8 @@ select:focus, input:focus, textarea:focus { border-color: var(--green); box-shad
 .task-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
 .task-card { min-height: 225px; padding: 19px; display: flex; flex-direction: column; background: #fbfcfa; border: 1px solid var(--line); border-top: 4px solid #8ba195; border-radius: 15px; transition: .2s; }
 .task-card:hover { transform: translateY(-3px); box-shadow: 0 12px 24px rgba(26,52,39,.08); }
-.task-card.priority-critical { border-top-color: var(--red); }
-.task-card.priority-high { border-top-color: var(--orange); }
-.task-card.priority-medium { border-top-color: #d3a722; }
-.task-card.priority-low { border-top-color: #5f9b78; }
 .task-meta { display: flex; gap: 6px; }
 .badge { padding: 3px 8px; border-radius: 999px; background: #e8eee9; color: #52635a; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
-.badge.priority { color: #704917; background: #fbefcc; }
 .badge.status-done { color: #266844; background: #dcefe4; }
 .badge.status-in_progress { color: #265b83; background: #dcebf5; }
 .task-card h3 { margin: 15px 0 7px; font-size: 18px; line-height: 1.25; }
@@ -85,7 +80,7 @@ select:focus, input:focus, textarea:focus { border-color: var(--green); box-shad
 .task-form label { font-weight: 750; }
 .task-form label > span { color: var(--red); }
 .task-form input, .task-form select, .task-form textarea { display: block; margin-top: 6px; padding: 12px 13px; font-weight: 400; resize: vertical; }
-.form-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; }
+.form-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 13px; }
 .form-actions { display: flex; justify-content: flex-end; gap: 8px; padding-top: 8px; }
 .alert { padding: 13px 17px; margin-bottom: 21px; color: #742a23; background: #fff0ee; border-left: 4px solid var(--red); border-radius: 8px; }
 .alert ul { margin: 5px 0 0; padding-left: 19px; }
@@ -111,4 +106,3 @@ footer { padding: 10px 20px 35px; color: var(--muted); text-align: center; font-
   .filters label { width: 100%; }
   .filters select { width: 100%; }
 }
-

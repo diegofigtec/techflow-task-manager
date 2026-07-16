@@ -64,7 +64,6 @@ class TaskManagerAppTests(unittest.TestCase):
         form = {
             "title": "Monitorar coleta",
             "description": "Acompanhar saída do veículo",
-            "priority": "high",
             "status": "todo",
             "due_date": "2030-06-01",
         }

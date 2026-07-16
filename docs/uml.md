@@ -14,7 +14,7 @@ flowchart LR
     actor --> UC4[Concluir tarefa]
     actor --> UC5[Excluir tarefa]
     gestor --> UC2
-    gestor --> UC6[Filtrar por status e prioridade]
+    gestor --> UC6[Filtrar por status e prazo]
     gestor --> UC7[Monitorar indicadores e atrasos]
     UC7 -. inclui .-> UC2
 ```
@@ -33,7 +33,7 @@ classDiagram
     class TaskRepository {
         -Path database_path
         +initialize()
-        +list_tasks(status, priority) list
+        +list_tasks(status, overdue_only) list
         +get_task(task_id) dict
         +create_task(data) int
         +update_task(task_id, data) bool
@@ -45,7 +45,6 @@ classDiagram
         +int id
         +str title
         +str description
-        +str priority
         +str status
         +date due_date
         +datetime created_at
@@ -71,4 +70,3 @@ A modelagem reduz ambiguidades antes da codificação. O diagrama de casos de us
 sistema das necessidades dos usuários, enquanto o diagrama de classes explicita
 responsabilidades, dependências e dados persistidos. Essa visão facilita estimativas, revisão,
 testes e futuras mudanças sem exigir a leitura imediata de todo o código.
-

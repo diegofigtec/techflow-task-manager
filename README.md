@@ -3,8 +3,8 @@
 [![Integração contínua](https://github.com/diegofigtec/techflow-task-manager/actions/workflows/ci.yml/badge.svg)](https://github.com/diegofigtec/techflow-task-manager/actions/workflows/ci.yml)
 
 Sistema web de gerenciamento de tarefas criado para a **TechFlow Solutions**, empresa fictícia
-que atende uma startup de logística. A aplicação oferece visibilidade do fluxo de trabalho,
-priorização de demandas críticas e acompanhamento de desempenho sem depender de frameworks ou
+que atende uma startup de logística. A aplicação oferece visibilidade do fluxo de trabalho e
+acompanhamento de desempenho sem depender de frameworks ou
 serviços externos.
 
 ## Objetivo e escopo
@@ -13,8 +13,7 @@ O produto permite que membros da equipe e gestores:
 
 - criem, consultem, editem e excluam tarefas;
 - organizem tarefas por status (`A fazer`, `Em progresso` e `Concluída`);
-- definam prioridades de baixa a crítica;
-- filtrem o backlog por status e prioridade;
+- filtrem o backlog por status e prazo;
 - filtrem rapidamente apenas tarefas atrasadas;
 - acompanhem indicadores de volume e progresso;
 - definam prazos e identifiquem tarefas atrasadas.
@@ -99,19 +98,19 @@ A modelagem é importante porque transforma necessidades do cliente em represent
 ser discutidas antes do código. Ela reduz ambiguidades, esclarece responsabilidades, apoia casos
 de teste e torna mudanças mais previsíveis.
 
-## Mudança de escopo simulada — versão 1.1
+## Mudança de escopo planejada — níveis de prioridade
 
-**Solicitação:** depois da primeira versão do CRUD, o cliente informou que apenas visualizar
-prioridades não era suficiente; atrasos em coletas e expedições precisavam ser detectados.
+**Versão-base atual:** o CRUD funcional permite registrar título, descrição, status e prazo. A
+funcionalidade de prioridade foi deliberadamente retirada desta branch para representar o produto
+antes da solicitação adicional do cliente.
 
-**Decisão:** adicionar prazo opcional (`due_date`), ordenar tarefas considerando prioridade e
-prazo, destacar itens vencidos, incluir um indicador de atrasos e oferecer um filtro dedicado para
-as tarefas vencidas no painel.
+**Solicitação do cliente:** adicionar níveis de prioridade (`baixa`, `média`, `alta` e `crítica`)
+para diferenciar demandas urgentes e permitir que o gestor filtre o backlog.
 
-**Justificativa:** a mudança aumenta o valor operacional sem alterar o objetivo central. Ela foi
-tratada como um novo card no Kanban, implementada em incremento isolado e coberta por testes. Uma
-migração mais sofisticada seria necessária em produção; no protótipo acadêmico, o esquema é criado
-do zero automaticamente.
+**Impacto previsto:** a mudança exigirá um novo campo no banco, validação dos valores permitidos,
+controles nos formulários, identificação visual nos cards, filtro no painel e novos testes. A
+implementação deve ocorrer em um commit próprio para permitir a comparação entre a versão-base e
+o incremento de escopo.
 
 ## Questões norteadoras
 
@@ -125,7 +124,7 @@ revisão; e Actions aplica verificações iguais a cada mudança.
 ### Principais beneficiados
 
 - **Equipe operacional:** registra e atualiza o trabalho diário.
-- **Gestor de logística:** identifica gargalos, atrasos e demandas críticas.
+- **Gestor de logística:** identifica gargalos, atrasos e acompanha o andamento das demandas.
 - **Cliente:** acompanha previsibilidade e evolução do produto.
 - **Equipe de desenvolvimento:** usa requisitos rastreáveis, testes e histórico para evoluir o
   sistema com segurança.

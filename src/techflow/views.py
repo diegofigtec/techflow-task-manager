@@ -6,12 +6,6 @@ from html import escape
 from typing import Any
 
 
-PRIORITY_LABELS = {
-    "low": "Baixa",
-    "medium": "Média",
-    "high": "Alta",
-    "critical": "Crítica",
-}
 STATUS_LABELS = {
     "todo": "A fazer",
     "in_progress": "Em progresso",
@@ -47,7 +41,6 @@ def dashboard(
     tasks: list[dict[str, Any]],
     metrics: dict[str, int],
     selected_status: str = "",
-    selected_priority: str = "",
     selected_overdue: str = "",
 ) -> str:
     metric_cards = "".join(
@@ -61,9 +54,6 @@ def dashboard(
         )
     )
     status_options = _options(STATUS_LABELS, selected_status, "Todos os status")
-    priority_options = _options(
-        PRIORITY_LABELS, selected_priority, "Todas as prioridades"
-    )
     overdue_options = _options(
         {"1": "Apenas atrasadas"}, selected_overdue, "Todos os prazos"
     )
@@ -80,7 +70,7 @@ def dashboard(
     <section class="hero">
       <div><span class="eyebrow">Visão da operação</span>
       <h1>Trabalho claro. Entregas no prazo.</h1>
-      <p>Acompanhe prioridades, progresso e prazos da equipe de logística em tempo real.</p></div>
+      <p>Acompanhe o progresso e os prazos da equipe de logística em tempo real.</p></div>
       <div class="pulse"><span></span>Sistema operacional</div>
     </section>
     <section class="metrics">{metric_cards}</section>
@@ -88,7 +78,6 @@ def dashboard(
       <div class="section-heading"><div><span class="eyebrow">Backlog</span><h2>Tarefas da equipe</h2></div>
         <form class="filters" method="get" action="/">
           <label>Status<select name="status">{status_options}</select></label>
-          <label>Prioridade<select name="priority">{priority_options}</select></label>
           <label>Prazo<select name="overdue">{overdue_options}</select></label>
           <button class="button" type="submit">Filtrar</button>
           <a class="button button-ghost" href="/">Limpar</a>
@@ -118,9 +107,8 @@ def _task_card(task: dict[str, Any]) -> str:
         due = f"Atrasada · {due}"
     description = escape(task.get("description") or "Sem descrição")
     return f"""
-    <article class="task-card priority-{task['priority']}">
+    <article class="task-card">
       <div class="task-meta">
-        <span class="badge priority">{PRIORITY_LABELS[task['priority']]}</span>
         <span class="badge status-{task['status']}">{STATUS_LABELS[task['status']]}</span>
       </div>
       <h3>{escape(task['title'])}</h3>
@@ -152,9 +140,6 @@ def task_form(
     if errors:
         items = "".join(f"<li>{escape(error)}</li>" for error in errors)
         error_html = f'<div class="alert"><strong>Revise os dados:</strong><ul>{items}</ul></div>'
-    priority_options = _options(
-        PRIORITY_LABELS, str(task.get("priority", "medium")), "Prioridade"
-    )
     status_options = _options(
         STATUS_LABELS, str(task.get("status", "todo")), "Status"
     )
@@ -173,7 +158,6 @@ def task_form(
             <textarea name="description" maxlength="1000" rows="5" placeholder="Contexto e critérios de aceite">{escape(str(task.get('description', '')))}</textarea>
           </label>
           <div class="form-row">
-            <label>Prioridade <span>*</span><select name="priority" required>{priority_options}</select></label>
             <label>Status <span>*</span><select name="status" required>{status_options}</select></label>
             <label>Prazo<input type="date" name="due_date" value="{escape(str(task.get('due_date') or ''))}"></label>
           </div>
