@@ -35,11 +35,10 @@ jobs:
       - name: Validar sintaxe
         run: python -m compileall -q src tests run.py
 
-      - name: Analisar qualidade do código
-        run: ruff check src tests run.py
+      - name: Normalizar e analisar qualidade do código
+        run: ruff check --fix src tests run.py
 
       - name: Executar testes automatizados
         env:
           PYTHONPATH: src
         run: python -m unittest discover -s tests -v
-
